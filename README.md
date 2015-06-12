@@ -27,6 +27,10 @@ shallowequal(object, other);
 // → true
 ```
 
+## Credit
+
+Code for `shallowEqual` originated from https://github.com/gaearon/react-pure-render/ and has since been refactored to have the exact same API as `lodash.isEqual`.
+
 ## License
 
 MIT

@@ -1,7 +1,7 @@
 
 const fetchKeys = require('lodash.keys');
 
-function shallowEqual(objA, objB, compare, compareContext) {
+module.exports = function shallowEqual(objA, objB, compare, compareContext) {
     if (objA === objB) {
         return true;
     }
@@ -38,4 +38,4 @@ function shallowEqual(objA, objB, compare, compareContext) {
     }
 
     return true;
-}
+};

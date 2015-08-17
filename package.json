@@ -26,9 +26,12 @@
     "compare"
   ],
   "devDependencies": {
-    "babel": "^5.5.6"
+    "babel": "^5.8.21",
+    "chai": "^3.2.0",
+    "lodash": "^3.10.1",
+    "mocha": "^2.2.5"
   },
   "dependencies": {
-    "lodash.keys": "^3.1.1"
+    "lodash.keys": "^3.1.2"
   }
 }

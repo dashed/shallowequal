@@ -2,6 +2,13 @@
 const fetchKeys = require('lodash.keys');
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
+
+    const ret = compare ? compare.call(compareContext, objA, objB) : void 0;
+
+    if(ret !== void 0) {
+        return !!ret;
+    }
+
     if (objA === objB) {
         return true;
     }

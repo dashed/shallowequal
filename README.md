@@ -1,4 +1,4 @@
-# shallowequal
+# shallowequal [![Build Status](https://travis-ci.org/Dashed/shallowequal.svg)](https://travis-ci.org/Dashed/shallowequal)
 
 > `shallowequal` is like lodash's `isEqual` but for shallow (strict) equal.
 

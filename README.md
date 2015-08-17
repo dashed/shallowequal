@@ -1,12 +1,12 @@
 # shallowequal
 
-> `shallowequal` is exactly like lodash's `isEqual` but for shallow equal.
+> `shallowequal` is like lodash's `isEqual` but for shallow (strict) equal.
 
 `shallowequal(value, other, [customizer], [thisArg])`
 
-Performs a shallow comparison between two given values to determine if they are equivalent. If `customizer` is provided it is invoked to compare values. If `customizer` returns `undefined` (i.e. `void 0`), then comparisons are handled by the `shallowequal` function instead. The `customizer` is bound to `thisArg` and invoked with three arguments: `(value, other, key)`. 
+Performs equality by iterating through keys on a `value` and returning `false` when any key has values which are not strictly equal between `value` and `other`. Returns `true` when the values of all keys are strictly equal. If `customizer` is provided it is invoked to compare values. If `customizer` returns `undefined` (i.e. `void 0`), then comparisons are handled by the `shallowequal` function instead. The `customizer` is bound to `thisArg` and invoked with three arguments: `(value, other, key)`. 
 
-**NOTE:** Docs is (shamelessly) lifted from [lodash's docs](https://lodash.com/docs#isEqual)
+**NOTE:** Docs is (shamelessly) adapted from [lodash's docs](https://lodash.com/docs#isEqual)
 
 ## Usage
 

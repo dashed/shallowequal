@@ -80,8 +80,9 @@ describe('shallowequal', function() {
 
     it('should provide the correct `customizer` arguments', () => {
         let argsList = [];
-        const object1 = { 'a': [1, 2], 'b': null };
-        const object2 = { 'a': [1, 2], 'b': null };
+        const arry = [1, 2];
+        const object1 = { 'a': arry, 'b': null };
+        const object2 = { 'a': arry, 'b': null };
 
         object1.b = object2;
         object2.b = object1;
@@ -89,16 +90,10 @@ describe('shallowequal', function() {
         const expected = [
             [object1, object2],
             [object1.a, object2.a, 'a'],
-            [object1.a[0], object2.a[0], 0],
-            [object1.a[1], object2.a[1], 1],
-            [object1.b, object2.b, 'b'],
-            [object1.b.a, object2.b.a, 'a'],
-            [object1.b.a[0], object2.b.a[0], 0],
-            [object1.b.a[1], object2.b.a[1], 1],
-            [object1.b.b, object2.b.b, 'b']
+            [object1.b, object2.b, 'b']
         ];
 
-        _.isEqual(object1, object2, function(...args) {
+        shallowequal(object1, object2, function(...args) {
             argsList.push(args);
         });
 
@@ -117,9 +112,9 @@ describe('shallowequal', function() {
 
         const noop = () => void 0;
 
-        expect(_.isEqual('a', 'a', noop)).to.equal(true);
-        expect(_.isEqual(['a'], ['a'], noop)).to.equal(true);
-        expect(_.isEqual({ '0': 'a' }, { '0': 'a' }, noop)).to.equal(true);
+        expect(shallowequal('a', 'a', noop)).to.equal(true);
+        expect(shallowequal(['a'], ['a'], noop)).to.equal(true);
+        expect(shallowequal({ '0': 'a' }, { '0': 'a' }, noop)).to.equal(true);
     });
 
     it('should not handle comparisons if `customizer` returns `true`', () => {
@@ -127,9 +122,9 @@ describe('shallowequal', function() {
             return _.isString(value) || undefined;
         };
 
-        expect(_.isEqual('a', 'b', customizer)).to.equal(true);
-        expect(_.isEqual(['a'], ['b'], customizer)).to.equal(true);
-        expect(_.isEqual({ '0': 'a' }, { '0': 'b' }, customizer)).to.equal(true);
+        expect(shallowequal('a', 'b', customizer)).to.equal(true);
+        expect(shallowequal(['a'], ['b'], customizer)).to.equal(true);
+        expect(shallowequal({ '0': 'a' }, { '0': 'b' }, customizer)).to.equal(true);
     });
 
     it('should not handle comparisons if `customizer` returns `false`', () => {
@@ -137,13 +132,13 @@ describe('shallowequal', function() {
             return _.isString(value) ? false : undefined;
         };
 
-        expect(_.isEqual('a', 'a', customizer)).to.equal(false);
-        expect(_.isEqual(['a'], ['a'], customizer)).to.equal(false);
-        expect(_.isEqual({ '0': 'a' }, { '0': 'a' }, customizer)).to.equal(false);
+        expect(shallowequal('a', 'a', customizer)).to.equal(false);
+        expect(shallowequal(['a'], ['a'], customizer)).to.equal(false);
+        expect(shallowequal({ '0': 'a' }, { '0': 'a' }, customizer)).to.equal(false);
     });
 
     it('should return a boolean value even if `customizer` does not', () => {
-        let actual = _.isEqual('a', 'b', _.constant('c'));
+        let actual = shallowequal('a', 'b', _.constant('c'));
         expect(actual).to.equal(true);
 
         const values = _.without(falsey, undefined);
@@ -151,7 +146,7 @@ describe('shallowequal', function() {
 
         actual = [];
         _.each(values, function(value) {
-            actual.push(_.isEqual('a', 'a', _.constant(value)));
+            actual.push(shallowequal('a', 'a', _.constant(value)));
         });
 
         expect(actual).to.eql(expected);
@@ -162,10 +157,10 @@ describe('shallowequal', function() {
         Foo.prototype.constructor = null;
 
         const object2 = { 'a': 1 };
-        expect(_.isEqual(new Foo, object2)).to.equal(false);
+        expect(shallowequal(new Foo, object2)).to.equal(true);
 
         const object1 = Object.create(null);
         object1.a = 1;
-        expect(_.isEqual(object1, object2)).to.equal(true);
+        expect(shallowequal(object1, object2)).to.equal(true);
     });
 });

@@ -1,9 +1,22 @@
-import chai, { expect } from 'chai';
-import shallowequal from '../src';
+import { expect } from 'chai';
+
+// ref: http://stackoverflow.com/a/16060619/412627
+function requireUncached(module){
+    delete require.cache[require.resolve(module)];
+    return require(module);
+}
 
 describe('shallowequal', function() {
 
+    let shallowequal;
+
+    // eslint-disable-next-line no-sparse-arrays
     const falsey = [, '', 0, false, NaN, null, undefined];
+
+    beforeEach(() => {
+        // isolated instances of shallowequal for each test.
+        shallowequal = requireUncached('../index.js');
+    });
 
     // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
     it('returns false if either argument is null', () => {

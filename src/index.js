@@ -1,11 +1,10 @@
+const HOP = Object.prototype.hasOwnProperty;
 
-const fetchKeys = require('lodash.keys');
+export default function shallowEqual(objA, objB, compare, compareContext) {
 
-module.exports = function shallowEqual(objA, objB, compare, compareContext) {
+    let ret = compare ? compare.call(compareContext, objA, objB) : undefined;
 
-    const ret = compare ? compare.call(compareContext, objA, objB) : void 0;
-
-    if(ret !== void 0) {
+    if(ret !== undefined) {
         return !!ret;
     }
 
@@ -13,35 +12,24 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
         return true;
     }
 
-    if (typeof objA !== 'object' || objA === null ||
-        typeof objB !== 'object' || objB === null) {
+    if (typeof objA !== 'object' || !objA ||
+        typeof objB !== 'object' || !objB ) {
         return false;
     }
 
-    const keysA = fetchKeys(objA);
-    const keysB = fetchKeys(objB);
+    for (let key in objA) {
+        if (!HOP.call(objB, key)) return false;
+        let valueA = objA[key];
+        let valueB = objB[key];
 
-    const len = keysA.length;
-    if (len !== keysB.length) {
-        return false;
+        ret = compare ? compare.call(compareContext, valueA, valueB, key) : undefined;
+        if(ret === false || ret === undefined && valueA !== valueB) {
+            return false;
+        }
     }
 
-    compareContext = compareContext || null;
-
-    // Test for A's keys different from B.
-    const bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
-    for (let i = 0; i < len; i++) {
-        const key = keysA[i];
-        if (!bHasOwnProperty(key)) {
-            return false;
-        }
-        const valueA = objA[key];
-        const valueB = objB[key];
-
-        const ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
-        if(ret === false || ret === void 0 && valueA !== valueB) {
-            return false;
-        }
+    for (let key in objB) {
+        if (!HOP.call(objA, key)) return false;
     }
 
     return true;

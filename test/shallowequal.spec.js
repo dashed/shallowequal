@@ -1,15 +1,10 @@
-const chai = require('chai');
-const expect = chai.expect;
-const _ = require('lodash');
+import chai, { expect } from 'chai';
+import _ from 'lodash';
+import shallowequal from '../src';
 
 describe('shallowequal', function() {
 
-    let shallowequal;
     const falsey = [, '', 0, false, NaN, null, undefined];
-
-    beforeEach(() => {
-        shallowequal = require('../src');
-    });
 
     // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
     it('returns false if either argument is null', () => {
@@ -68,6 +63,16 @@ describe('shallowequal', function() {
         ).to.equal(false);
     });
 
+    it('returns true is values are not primitives but are ===', () => {
+        let obj = {};
+        expect(
+          shallowequal(
+            {a: 1, b: 2, c: obj},
+            {a: 1, b: 2, c: obj}
+          )
+        ).to.equal(true);
+    });
+
     // subsequent test cases are copied from lodash tests
     it('returns false if arguments are not shallow equal', () => {
         expect(
@@ -101,11 +106,11 @@ describe('shallowequal', function() {
     });
 
     it('should set the `this` binding', () => {
-      const actual = shallowequal('a', 'b', function(a, b) {
-        return this[a] == this[b];
-      }, { 'a': 1, 'b': 1 });
+        const actual = shallowequal('a', 'b', function(a, b) {
+            return this[a] == this[b];
+        }, { 'a': 1, 'b': 1 });
 
-      expect(actual).to.equal(true);
+        expect(actual).to.equal(true);
     });
 
     it('should handle comparisons if `customizer` returns `undefined`', () => {

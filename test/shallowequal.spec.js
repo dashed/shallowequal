@@ -1,5 +1,4 @@
 import chai, { expect } from 'chai';
-import _ from 'lodash';
 import shallowequal from '../src';
 
 describe('shallowequal', function() {
@@ -124,7 +123,7 @@ describe('shallowequal', function() {
 
     it('should not handle comparisons if `customizer` returns `true`', () => {
         const customizer = function(value) {
-            return _.isString(value) || undefined;
+            return typeof value === 'string' || undefined;
         };
 
         expect(shallowequal('a', 'b', customizer)).to.equal(true);
@@ -134,7 +133,7 @@ describe('shallowequal', function() {
 
     it('should not handle comparisons if `customizer` returns `false`', () => {
         const customizer = function(value) {
-            return _.isString(value) ? false : undefined;
+            return typeof value === 'string' ? false : undefined;
         };
 
         expect(shallowequal('a', 'a', customizer)).to.equal(false);
@@ -143,15 +142,15 @@ describe('shallowequal', function() {
     });
 
     it('should return a boolean value even if `customizer` does not', () => {
-        let actual = shallowequal('a', 'b', _.constant('c'));
+        let actual = shallowequal('a', 'b', () => 'c');
         expect(actual).to.equal(true);
 
-        const values = _.without(falsey, undefined);
-        const expected = _.map(values, _.constant(false));
+        const values = falsey.filter(v => v !== undefined);
+        const expected = values.map(() => false);
 
         actual = [];
-        _.each(values, function(value) {
-            actual.push(shallowequal('a', 'a', _.constant(value)));
+        values.forEach(value => {
+            actual.push(shallowequal('a', 'a', () => (value)));
         });
 
         expect(actual).to.eql(expected);

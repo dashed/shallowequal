@@ -18,6 +18,7 @@ export default function shallowEqual(objA, objB, compare, compareContext) {
     }
 
     for (let key in objA) {
+        if (!HOP.call(objA, key)) continue;
         if (!HOP.call(objB, key)) return false;
         let valueA = objA[key];
         let valueB = objB[key];
@@ -29,6 +30,7 @@ export default function shallowEqual(objA, objB, compare, compareContext) {
     }
 
     for (let key in objB) {
+        if (!HOP.call(objB, key)) continue;
         if (!HOP.call(objA, key)) return false;
     }
 

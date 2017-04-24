@@ -3,7 +3,8 @@
 
     "env": {
         "browser": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
 
     "rules": {
@@ -28,14 +29,14 @@
         "dot-notation": 2,
         "consistent-return": 2,
         "no-shadow": 2,
-        "no-undefined": 2,
+        "no-undef": 2,
         "no-multi-spaces": 2,
         "linebreak-style": 2,
 
         "react/display-name": 0, // babel covers this
         "react/jsx-boolean-value": 1,
         "react/jsx-no-undef": 1,
-        "react/jsx-quotes": 1,
+        "jsx-quotes": 1,
         "react/jsx-sort-prop-types": 0,
         "react/jsx-sort-props": 0,
         "react/jsx-uses-react": 1,
@@ -48,7 +49,7 @@
         "react/react-in-jsx-scope": 1,
         "react/self-closing-comp": 1,
         "react/sort-comp": 0,
-        "react/wrap-multilines": 1
+        "react/jsx-wrap-multilines": 1
     },
 
     "ecmaFeatures": {

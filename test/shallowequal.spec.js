@@ -1,15 +1,9 @@
-const chai = require('chai');
-const expect = chai.expect;
-const _ = require('lodash');
+import chai, { expect } from 'chai';
+import shallowequal from '../src';
 
 describe('shallowequal', function() {
 
-    let shallowequal;
     const falsey = [, '', 0, false, NaN, null, undefined];
-
-    beforeEach(() => {
-        shallowequal = require('../src');
-    });
 
     // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
     it('returns false if either argument is null', () => {
@@ -68,6 +62,16 @@ describe('shallowequal', function() {
         ).to.equal(false);
     });
 
+    it('returns true is values are not primitives but are ===', () => {
+        let obj = {};
+        expect(
+          shallowequal(
+            {a: 1, b: 2, c: obj},
+            {a: 1, b: 2, c: obj}
+          )
+        ).to.equal(true);
+    });
+
     // subsequent test cases are copied from lodash tests
     it('returns false if arguments are not shallow equal', () => {
         expect(
@@ -101,11 +105,11 @@ describe('shallowequal', function() {
     });
 
     it('should set the `this` binding', () => {
-      const actual = shallowequal('a', 'b', function(a, b) {
-        return this[a] == this[b];
-      }, { 'a': 1, 'b': 1 });
+        const actual = shallowequal('a', 'b', function(a, b) {
+            return this[a] == this[b];
+        }, { 'a': 1, 'b': 1 });
 
-      expect(actual).to.equal(true);
+        expect(actual).to.equal(true);
     });
 
     it('should handle comparisons if `customizer` returns `undefined`', () => {
@@ -119,7 +123,7 @@ describe('shallowequal', function() {
 
     it('should not handle comparisons if `customizer` returns `true`', () => {
         const customizer = function(value) {
-            return _.isString(value) || undefined;
+            return typeof value === 'string' || undefined;
         };
 
         expect(shallowequal('a', 'b', customizer)).to.equal(true);
@@ -129,7 +133,7 @@ describe('shallowequal', function() {
 
     it('should not handle comparisons if `customizer` returns `false`', () => {
         const customizer = function(value) {
-            return _.isString(value) ? false : undefined;
+            return typeof value === 'string' ? false : undefined;
         };
 
         expect(shallowequal('a', 'a', customizer)).to.equal(false);
@@ -138,15 +142,15 @@ describe('shallowequal', function() {
     });
 
     it('should return a boolean value even if `customizer` does not', () => {
-        let actual = shallowequal('a', 'b', _.constant('c'));
+        let actual = shallowequal('a', 'b', () => 'c');
         expect(actual).to.equal(true);
 
-        const values = _.without(falsey, undefined);
-        const expected = _.map(values, _.constant(false));
+        const values = falsey.filter(v => v !== undefined);
+        const expected = values.map(() => false);
 
         actual = [];
-        _.each(values, function(value) {
-            actual.push(shallowequal('a', 'a', _.constant(value)));
+        values.forEach(value => {
+            actual.push(shallowequal('a', 'a', () => (value)));
         });
 
         expect(actual).to.eql(expected);

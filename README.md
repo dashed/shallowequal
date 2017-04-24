@@ -1,4 +1,4 @@
-# shallowequal [![Build Status](https://travis-ci.org/dashed/shallowequal.svg)](https://travis-ci.org/dashed/shallowequal)
+# shallowequal [![Build Status](https://travis-ci.org/dashed/shallowequal.svg)](https://travis-ci.org/dashed/shallowequal) [![Downloads](https://img.shields.io/npm/dm/shallowequal.svg)](https://npmjs.com/shallowequal)
 
 > `shallowequal` is like lodash's [`isEqualWith`](https://lodash.com/docs/4.17.4#isEqualWith) but for shallow (strict) equal.
 

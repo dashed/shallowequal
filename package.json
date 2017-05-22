@@ -1,7 +1,7 @@
 {
   "name": "shallowequal",
   "version": "0.2.2",
-  "description": "Like lodash isEqual but for shallow equal",
+  "description": "Like lodash isEqualWith but for shallow equal.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src test",

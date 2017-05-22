@@ -29,7 +29,8 @@
     "shallow",
     "equal",
     "isequal",
-    "compare"
+    "compare",
+    "isequalwith"
   ],
   "eslintConfig": {
     "parser": "babel-eslint",

@@ -75,7 +75,7 @@ describe('shallowequal', function() {
         ).to.equal(false);
     });
 
-    it('returns true is values are not primitives but are ===', () => {
+    it('returns true if values are not primitives but are ===', () => {
         let obj = {};
         expect(
           shallowequal(

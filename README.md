@@ -38,6 +38,18 @@ shallowequal(object, other);
 
 Code for `shallowEqual` originated from https://github.com/gaearon/react-pure-render/ and has since been refactored to have the exact same API as `lodash.isEqualWith` (as of `v4.17.4`).
 
+## Development
+
+- `node.js` and `npm`. See: https://github.com/creationix/nvm#installation
+- `yarn`. See: https://yarnpkg.com/en/docs/install
+- `npm` dependencies. Run: `yarn install`
+
+### Chores
+
+- Lint: `yarn run lint`
+- Test: `yarn run test`
+- Pre-publish: `yarn run prepublish`
+
 ## License
 
 MIT.

@@ -1,5 +1,7 @@
 # shallowequal [![Build Status](https://travis-ci.org/dashed/shallowequal.svg)](https://travis-ci.org/dashed/shallowequal) [![Downloads](https://img.shields.io/npm/dm/shallowequal.svg)](https://npmjs.com/shallowequal) [![npm version](https://img.shields.io/npm/v/shallowequal.svg?style=flat)](https://www.npmjs.com/package/shallowequal)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dashed/shallowequal.svg)](https://greenkeeper.io/)
+
 > `shallowequal` is like lodash's [`isEqualWith`](https://lodash.com/docs/4.17.4#isEqualWith) but for shallow (strict) equal.
 
 `shallowequal(value, other, [customizer], [thisArg])`

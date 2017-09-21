@@ -18,9 +18,12 @@ The `customizer` is bound to `thisArg` and invoked with three arguments: `(value
 
 ## Usage
 
-```
-$ npm install --save shallowequal
+```sh
 $ yarn add shallowequal
+# npm v5+
+$ npm install shallowequal
+# before npm v5
+$ npm install --save shallowequal
 ```
 
 ```js

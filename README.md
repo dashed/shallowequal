@@ -16,7 +16,7 @@ The `customizer` is bound to `thisArg` and invoked with three arguments: `(value
 
 **NOTE:** Docs are (shamelessly) adapted from [lodash's docs](https://lodash.com/docs/4.17.4#isEqualWith)
 
-## Usage
+## Install
 
 ```sh
 $ yarn add shallowequal
@@ -25,6 +25,8 @@ $ npm install shallowequal
 # before npm v5
 $ npm install --save shallowequal
 ```
+
+## Usage
 
 ```js
 const shallowequal = require('shallowequal');

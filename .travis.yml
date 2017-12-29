@@ -1,10 +1,14 @@
 sudo: false
 language: node_js
 node_js:
-- '7'
-- '6'
-- '5'
-- '4'
+  - 'node'
+  - 'iojs'
+  - 'lts/*'
+  - '8'
+  - '7'
+  - '6'
+  - '5'
+  - '4'
 script: npm run travis
 before_install: yarn global add greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update

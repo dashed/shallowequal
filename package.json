@@ -4,7 +4,7 @@
   "description": "Like lodash isEqualWith but for shallow equal.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src test",
+    "lint": "eslint index.js test",
     "test": "mocha --require babel-register",
     "prepublish": "npm run lint && npm run test",
     "travis": "npm run lint && npm run test",

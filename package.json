@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "mocha --compilers js:babel-register",
+    "test": "mocha --require babel-register",
     "prepublish": "npm run lint && npm run test",
     "travis": "npm run lint && npm run test"
   },

@@ -7,7 +7,12 @@
     "lint": "eslint src test",
     "test": "mocha --require babel-register",
     "prepublish": "npm run lint && npm run test",
-    "travis": "npm run lint && npm run test"
+    "travis": "npm run lint && npm run test",
+    "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "author": {
     "name": "Alberto Leal",
@@ -16,9 +21,7 @@
   },
   "repository": "dashed/shallowequal",
   "license": "MIT",
-  "files": [
-    "index.js"
-  ],
+  "files": ["index.js"],
   "keywords": [
     "shallowequal",
     "shallow",
@@ -34,9 +37,7 @@
       "node": true,
       "mocha": true
     },
-    "extends": [
-      "eslint:recommended"
-    ]
+    "extends": ["eslint:recommended"]
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",
@@ -44,6 +45,9 @@
     "babel-register": "^6.24.1",
     "chai": "^4.0.0",
     "eslint": "^4.7.1",
-    "mocha": "^4.0.0"
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "mocha": "^4.0.0",
+    "prettier": "^1.9.2"
   }
 }

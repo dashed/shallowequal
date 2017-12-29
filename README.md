@@ -53,9 +53,10 @@ Code for `shallowEqual` originated from https://github.com/gaearon/react-pure-re
 
 ### Chores
 
-- Lint: `yarn run lint`
-- Test: `yarn run test`
-- Pre-publish: `yarn run prepublish`
+- Lint: `yarn lint`
+- Test: `yarn test`
+- Pretty: `yarn pretty`
+- Pre-publish: `yarn prepublish`
 
 ## License
 

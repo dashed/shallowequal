@@ -14,7 +14,7 @@ If `customizer` (expected to be a function) is provided it is invoked to compare
 
 The `customizer` is bound to `thisArg` and invoked with three arguments: `(value, other, key)`.
 
-**NOTE:** Docs are (shamelessly) adapted from [lodash's docs](https://lodash.com/docs/4.17.4#isEqualWith)
+**NOTE:** Docs are (shamelessly) adapted from [lodash's v3.x docs](https://lodash.com/docs/3.10.1#isEqualWith)
 
 ## Install
 

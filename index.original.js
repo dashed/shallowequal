@@ -1,6 +1,11 @@
-//
+// @flow
 
-module.exports = function shallowEqual(objA, objB, compare, compareContext) {
+module.exports = function shallowEqual<T, U>(
+  objA?: ?T,
+  objB?: ?U,
+  compare?: ?(objValue: any, otherValue: any, key?: string) => boolean | void,
+  compareContext?: ?any
+): boolean {
   var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
 
   if (ret !== void 0) {

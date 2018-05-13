@@ -6,13 +6,18 @@
   "scripts": {
     "lint": "eslint index.js test",
     "test": "mocha --require babel-register",
-    "prepublish": "npm run lint && npm run test",
+    "build:strip-flow":
+      "flow-remove-types --pretty index.original.js > index.js",
+    "build:gen-flow": "flow gen-flow-files index.original.js > index.js.flow",
+    "build": "npm run build:strip-flow && npm run build:gen-flow",
+    "prepublish":
+      "npm run build && npm run pretty && npm run lint && npm run test",
     "travis": "npm run lint && npm run test",
-    "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.js'",
+    "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.{js,js.flow}'",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"]
+    "*.{js,json,css,js.flow}": ["prettier --write", "git add"]
   },
   "author": {
     "name": "Alberto Leal",
@@ -21,7 +26,7 @@
   },
   "repository": "dashed/shallowequal",
   "license": "MIT",
-  "files": ["index.js"],
+  "files": ["index.js", "index.js.flow", "index.original.js"],
   "keywords": [
     "shallowequal",
     "shallow",
@@ -45,6 +50,8 @@
     "babel-register": "^6.24.1",
     "chai": "^4.0.0",
     "eslint": "^4.7.1",
+    "flow-bin": "^0.72.0",
+    "flow-remove-types": "^1.2.3",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mocha": "^5.0.0",

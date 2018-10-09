@@ -3,11 +3,11 @@ language: node_js
 node_js:
   - 'node'
   - 'lts/*'
+  - '10'
+  - '9'
   - '8'
   - '7'
   - '6'
-  - '5'
-  - '4'
 script: npm run travis
 before_install: yarn global add greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update

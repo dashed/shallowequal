@@ -37,19 +37,19 @@ shallowequal(
   }
 );
 
-// $ExpectError
 shallowequal(
   "a",
   "b",
+  // $ExpectError
   (x, y, z: ?number): boolean => {
     return true;
   }
 );
 
-// $ExpectError
 shallowequal(
   "a",
   "b",
+  // $ExpectError
   (): number => {
     return 42;
   }

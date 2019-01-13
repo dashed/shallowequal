@@ -6,7 +6,7 @@
 
 `shallowequal(value, other, [customizer], [thisArg])`
 
-Performs a ***shallow equality*** comparison between two values (i.e. `value` and `other`) to determine if they are equivalent.
+Performs a **_shallow equality_** comparison between two values (i.e. `value` and `other`) to determine if they are equivalent.
 
 The equality is performed by iterating through keys on the given `value`, and returning `false` whenever any key has values which are not **strictly equal** between `value` and `other`. Otherwise, return `true` whenever the values of all keys are strictly equal.
 
@@ -29,10 +29,10 @@ $ npm install --save shallowequal
 ## Usage
 
 ```js
-const shallowequal = require('shallowequal');
+const shallowequal = require("shallowequal");
 
-const object = { 'user': 'fred' };
-const other = { 'user': 'fred' };
+const object = { user: "fred" };
+const other = { user: "fred" };
 
 object == other;
 // → false

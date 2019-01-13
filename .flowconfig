@@ -1,11 +1,16 @@
 [ignore]
 
 [include]
+./index.js.flow
 
 [libs]
 
 [lints]
 
+
 [options]
+# from: https://medium.com/@gcanti/testing-flow-declaration-files-69915089fa68
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
+include_warnings=true
 
 [strict]

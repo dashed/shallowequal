@@ -10,7 +10,7 @@
     "travis": "npm run flow:check && npm run lint && npm run test",
     "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.{js,json,js.flow,md}'",
     "precommit": "lint-staged",
-    "flow:check": "flow check index.original.js"
+    "flow:check": "flow check"
   },
   "lint-staged": {
     "*.{js,json,js.flow,md}": [

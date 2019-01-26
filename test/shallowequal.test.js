@@ -1,5 +1,3 @@
-import { expect } from "chai";
-
 // ref: http://stackoverflow.com/a/16060619/412627
 function requireUncached(module) {
   delete require.cache[require.resolve(module)];
@@ -19,47 +17,47 @@ describe("shallowequal", function() {
 
   // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
   it("returns false if either argument is null", () => {
-    expect(shallowequal(null, {})).to.equal(false);
-    expect(shallowequal({}, null)).to.equal(false);
+    expect(shallowequal(null, {})).toEqual(false);
+    expect(shallowequal({}, null)).toEqual(false);
   });
 
   it("returns true if both arguments are null or undefined", () => {
-    expect(shallowequal(null, null)).to.equal(true);
-    expect(shallowequal(undefined, undefined)).to.equal(true);
+    expect(shallowequal(null, null)).toEqual(true);
+    expect(shallowequal(undefined, undefined)).toEqual(true);
   });
 
   it("returns true if arguments are shallow equal", () => {
-    expect(shallowequal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 })).to.equal(
+    expect(shallowequal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 })).toEqual(
       true
     );
   });
 
   it("returns false if arguments are not objects and not equal", () => {
-    expect(shallowequal(1, 2)).to.equal(false);
+    expect(shallowequal(1, 2)).toEqual(false);
   });
 
   it("returns false if only one argument is not an object", () => {
-    expect(shallowequal(1, {})).to.equal(false);
+    expect(shallowequal(1, {})).toEqual(false);
   });
 
   it("returns false if first argument has too many keys", () => {
-    expect(shallowequal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 })).to.equal(false);
+    expect(shallowequal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 })).toEqual(false);
   });
 
   it("returns false if second argument has too many keys", () => {
-    expect(shallowequal({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 })).to.equal(false);
+    expect(shallowequal({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 })).toEqual(false);
   });
 
   it("returns true if values are not primitives but are ===", () => {
     let obj = {};
     expect(
       shallowequal({ a: 1, b: 2, c: obj }, { a: 1, b: 2, c: obj })
-    ).to.equal(true);
+    ).toEqual(true);
   });
 
   // subsequent test cases are copied from lodash tests
   it("returns false if arguments are not shallow equal", () => {
-    expect(shallowequal({ a: 1, b: 2, c: {} }, { a: 1, b: 2, c: {} })).to.equal(
+    expect(shallowequal({ a: 1, b: 2, c: {} }, { a: 1, b: 2, c: {} })).toEqual(
       false
     );
   });
@@ -83,7 +81,7 @@ describe("shallowequal", function() {
       argsList.push(args);
     });
 
-    expect(argsList).to.eql(expected);
+    expect(argsList).toEqual(expected);
   });
 
   it("should set the `this` binding", () => {
@@ -96,15 +94,15 @@ describe("shallowequal", function() {
       { a: 1, b: 1 }
     );
 
-    expect(actual).to.equal(true);
+    expect(actual).toEqual(true);
   });
 
   it("should handle comparisons if `customizer` returns `undefined`", () => {
     const noop = () => void 0;
 
-    expect(shallowequal("a", "a", noop)).to.equal(true);
-    expect(shallowequal(["a"], ["a"], noop)).to.equal(true);
-    expect(shallowequal({ "0": "a" }, { "0": "a" }, noop)).to.equal(true);
+    expect(shallowequal("a", "a", noop)).toEqual(true);
+    expect(shallowequal(["a"], ["a"], noop)).toEqual(true);
+    expect(shallowequal({ "0": "a" }, { "0": "a" }, noop)).toEqual(true);
   });
 
   it("should not handle comparisons if `customizer` returns `true`", () => {
@@ -112,9 +110,9 @@ describe("shallowequal", function() {
       return typeof value === "string" || undefined;
     };
 
-    expect(shallowequal("a", "b", customizer)).to.equal(true);
-    expect(shallowequal(["a"], ["b"], customizer)).to.equal(true);
-    expect(shallowequal({ "0": "a" }, { "0": "b" }, customizer)).to.equal(true);
+    expect(shallowequal("a", "b", customizer)).toEqual(true);
+    expect(shallowequal(["a"], ["b"], customizer)).toEqual(true);
+    expect(shallowequal({ "0": "a" }, { "0": "b" }, customizer)).toEqual(true);
   });
 
   it("should not handle comparisons if `customizer` returns `false`", () => {
@@ -122,16 +120,14 @@ describe("shallowequal", function() {
       return typeof value === "string" ? false : undefined;
     };
 
-    expect(shallowequal("a", "a", customizer)).to.equal(false);
-    expect(shallowequal(["a"], ["a"], customizer)).to.equal(false);
-    expect(shallowequal({ "0": "a" }, { "0": "a" }, customizer)).to.equal(
-      false
-    );
+    expect(shallowequal("a", "a", customizer)).toEqual(false);
+    expect(shallowequal(["a"], ["a"], customizer)).toEqual(false);
+    expect(shallowequal({ "0": "a" }, { "0": "a" }, customizer)).toEqual(false);
   });
 
   it("should return a boolean value even if `customizer` does not", () => {
     let actual = shallowequal("a", "b", () => "c");
-    expect(actual).to.equal(true);
+    expect(actual).toEqual(true);
 
     const values = falsey.filter(v => v !== undefined);
     const expected = values.map(() => false);
@@ -141,7 +137,7 @@ describe("shallowequal", function() {
       actual.push(shallowequal("a", "a", () => value));
     });
 
-    expect(actual).to.eql(expected);
+    expect(actual).toEqual(expected);
   });
 
   it("should treat objects created by `Object.create(null)` like any other plain object", () => {
@@ -151,10 +147,10 @@ describe("shallowequal", function() {
     Foo.prototype.constructor = null;
 
     const object2 = { a: 1 };
-    expect(shallowequal(new Foo(), object2)).to.equal(true);
+    expect(shallowequal(new Foo(), object2)).toEqual(true);
 
     const object1 = Object.create(null);
     object1.a = 1;
-    expect(shallowequal(object1, object2)).to.equal(true);
+    expect(shallowequal(object1, object2)).toEqual(true);
   });
 });

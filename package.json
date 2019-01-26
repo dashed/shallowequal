@@ -6,11 +6,12 @@
   "scripts": {
     "lint": "eslint index.js test",
     "test": "jest .",
-    "prepare": "npm run flow:check && npm run pretty && npm run lint && npm run test",
-    "travis": "npm run flow:check && npm run lint && npm run test",
+    "prepare": "npm run build && npm run pretty && npm run flow:check && npm run lint && npm run test",
+    "travis": "npm run prepare",
     "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.{js,json,js.flow,md}'",
     "precommit": "lint-staged",
-    "flow:check": "flow check"
+    "flow:check": "flow check",
+    "build": "babel index.original.js > index.js"
   },
   "lint-staged": {
     "*.{js,json,js.flow,md}": [
@@ -53,14 +54,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-flow-strip-types": "^7.2.3",
+    "@babel/preset-env": "^7.3.1",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.0.0",
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.12.0",
     "eslint-plugin-jest": "^22.1.3",
     "flow-bin": "^0.92.1",
     "husky": "^1.3.1",
-    "jest": "^23.6.0",
+    "jest": "^24.0.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3"
   }

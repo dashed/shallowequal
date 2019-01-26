@@ -1,4 +1,4 @@
-//
+"use strict";
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
   var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
@@ -22,9 +22,8 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
     return false;
   }
 
-  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB); // Test for A's keys different from B.
 
-  // Test for A's keys different from B.
   for (var idx = 0; idx < keysA.length; idx++) {
     var key = keysA[idx];
 
@@ -34,7 +33,6 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 
     var valueA = objA[key];
     var valueB = objB[key];
-
     ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
 
     if (ret === false || (ret === void 0 && valueA !== valueB)) {

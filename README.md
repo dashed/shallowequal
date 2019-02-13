@@ -8,7 +8,9 @@
 
 Performs a **_shallow equality_** comparison between two values (i.e. `value` and `other`) to determine if they are equivalent.
 
-The equality is performed by iterating through keys on the given `value`, and returning `false` whenever any key has values which are not **strictly equal** between `value` and `other`. Otherwise, return `true` whenever the values of all keys are strictly equal.
+The equality check returns true if `value` and `other` are already strictly equal, OR when all the following are true:
+  - `value` and `other` are both objects with the same keys
+  - For each key, the value in `value` and `other` are **strictly equal** (`===`)
 
 If `customizer` (expected to be a function) is provided it is invoked to compare values. If `customizer` returns `undefined` (i.e. `void 0`), then comparisons are handled by the `shallowequal` function instead.
 

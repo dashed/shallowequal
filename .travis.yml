@@ -5,14 +5,13 @@ node_js:
   - 'lts/*'
   - '10'
   - '8'
-  - '6'
 script: npm run travis
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/9445#issuecomment-428487451
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn global add greenkeeper-lockfile@1
-install: yarn install --ignore-engines
+install: yarn install
 before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
 env:

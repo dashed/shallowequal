@@ -1,9 +1,3 @@
-// ref: http://stackoverflow.com/a/16060619/412627
-function requireUncached(module) {
-  delete require.cache[require.resolve(module)];
-  return require(module);
-}
-
 describe("shallowequal", function() {
   let shallowequal;
 
@@ -12,7 +6,8 @@ describe("shallowequal", function() {
 
   beforeEach(() => {
     // isolated instances of shallowequal for each test.
-    shallowequal = requireUncached("../index.js");
+    jest.resetModules();
+    shallowequal = jest.requireActual("../index.js");
   });
 
   // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js

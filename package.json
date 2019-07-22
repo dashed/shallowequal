@@ -6,9 +6,8 @@
   "scripts": {
     "lint": "eslint index.js test",
     "test": "jest .",
-    "audit:check": "audit-ci --moderate",
     "prepare": "npm run flow:check && npm run pretty && npm run lint && npm run test",
-    "travis": "npm run audit:check && npm run flow:check && npm run lint && npm run test",
+    "travis": "npm run flow:check && npm run lint && npm run test",
     "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.{js,json,js.flow,md}'",
     "precommit": "lint-staged",
     "flow:check": "flow check"
@@ -56,7 +55,6 @@
   "devDependencies": {
     "@babel/core": "7.4.4",
     "@babel/preset-env": "7.4.4",
-    "audit-ci": "1.6.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.7.1",
     "eslint": "5.16.0",

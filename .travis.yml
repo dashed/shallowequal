@@ -6,14 +6,4 @@ node_js:
   - '10'
   - '8'
 script: npm run travis
-before_install:
-  # https://github.com/travis-ci/travis-ci/issues/9445#issuecomment-428487451
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-  - yarn global add greenkeeper-lockfile@1
 install: yarn install
-before_script: greenkeeper-lockfile-update
-after_script: greenkeeper-lockfile-upload
-env:
-  global:
-    secure: SLe5LTxtVtAsjdWgf81txWpURFmn7cR8smq7d0DJGndRoBTPSufHYevo3pMSG/lbQMgVm0nMEKkn+AcY8km45mxWa84oldbxmFqlVpHuBKF1GXfi625P9SMNm9t+gGFJqRHgAanzkD1IuaEcsZpOLVkri557exWap/LHdYtfaGR8oXQZUDwBDgNLrvI4pz3Wd52KmaNqStHrZc1GexbnybsK1EW5bGLUkMQ5j86Xgm7CtYfhqJ+kcGuq6u3+yrTauc8JpkkTlrME6hTrOUtwryx7H8HqXbIK5i3aLh1B7tIA3WHsoZjxC5fKmdvagXOq/Qjs7JBupSl0zjZZyBRp+oF9ezc0IhMxnIkpx/Yhs9O6Ic2m3aOr8SnPjXrMCRFRPIJfrs+pQbhnhI1kdfsKMoZlsG5/yA1igWwG8e+S0KMxSaiq5x0XyHLvBI+aR1LKOru2lTQvu7JsmnMFxESl58qFp34lbAK96TjxcCw4ZiuWaFg6YrXuD838pYh1KoMhpYy9p2VYcYUiy9GEECuZf3XGMnR37BE3qs8RT7bUPo7oeK3yaY34bMMYutmAuU8pmB/XoYKT7dfFuRaRUCWceIjAq2zEF9mBLOGgLcHGu+HOFSHaupqlcIWUSgtoO5QfZ8GpGoFFpq/Us4IA8BvunuEDlJjbkLoWavmKGa2om2Y=

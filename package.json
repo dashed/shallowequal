@@ -60,7 +60,7 @@
     "eslint": "6.1.0",
     "eslint-plugin-jest": "22.15.0",
     "flow-bin": "0.104.0",
-    "husky": "3.0.2",
+    "husky": "3.0.3",
     "jest": "24.8.0",
     "lint-staged": "9.2.1",
     "prettier": "1.18.2"

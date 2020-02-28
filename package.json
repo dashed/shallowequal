@@ -62,7 +62,7 @@
     "flow-bin": "0.119.1",
     "husky": "3.1.0",
     "jest": "24.9.0",
-    "lint-staged": "10.0.7",
+    "lint-staged": "10.0.8",
     "prettier": "1.19.1"
   }
 }

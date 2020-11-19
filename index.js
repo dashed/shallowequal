@@ -1,5 +1,11 @@
 //
 
+function defaultCompare(a, b) {
+  // `NaN === NaN` returns `false`
+  // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN#Polyfill
+  return a === b || (typeof a === 'number' && a !== a && typeof b === 'number' && b !== b);
+}
+
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
   var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
 
@@ -7,7 +13,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
     return !!ret;
   }
 
-  if (objA === objB) {
+  if (defaultCompare(objA, objB)) {
     return true;
   }
 
@@ -37,7 +43,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 
     ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
 
-    if (ret === false || (ret === void 0 && valueA !== valueB)) {
+    if (ret === false || (ret === void 0 && !defaultCompare(valueA, valueB))) {
       return false;
     }
   }

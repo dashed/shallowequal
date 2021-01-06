@@ -7,7 +7,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
     return !!ret;
   }
 
-  if (objA === objB) {
+  if (Object.is(objA, objB)) {
     return true;
   }
 
@@ -37,7 +37,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 
     ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
 
-    if (ret === false || (ret === void 0 && valueA !== valueB)) {
+    if (ret === false || (ret === void 0 && !Object.is(valueA, valueB))) {
       return false;
     }
   }

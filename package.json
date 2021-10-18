@@ -59,7 +59,7 @@
     "babel-jest": "25.2.3",
     "eslint": "6.8.0",
     "eslint-plugin-jest": "23.8.2",
-    "flow-bin": "0.120.1",
+    "flow-bin": "0.162.0",
     "husky": "3.1.0",
     "jest": "25.2.3",
     "lint-staged": "10.0.9",

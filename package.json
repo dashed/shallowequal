@@ -63,6 +63,6 @@
     "husky": "3.1.0",
     "jest": "25.2.3",
     "lint-staged": "10.0.9",
-    "prettier": "1.19.1"
+    "prettier": "2.4.1"
   }
 }

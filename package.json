@@ -25,6 +25,7 @@
   },
   "repository": "dashed/shallowequal",
   "license": "MIT",
+  "sideEffects": false,
   "files": [
     "index.js",
     "index.js.flow",

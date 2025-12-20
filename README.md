@@ -1,4 +1,4 @@
-# shallowequal [![Build Status](https://travis-ci.org/dashed/shallowequal.svg)](https://travis-ci.org/dashed/shallowequal) [![Downloads](https://img.shields.io/npm/dm/shallowequal.svg)](https://npmjs.com/shallowequal) [![npm version](https://img.shields.io/npm/v/shallowequal.svg?style=flat)](https://www.npmjs.com/package/shallowequal)
+# shallowequal [![CI](https://github.com/dashed/shallowequal/actions/workflows/ci.yml/badge.svg)](https://github.com/dashed/shallowequal/actions/workflows/ci.yml) [![Downloads](https://img.shields.io/npm/dm/shallowequal.svg)](https://npmjs.com/shallowequal) [![npm version](https://img.shields.io/npm/v/shallowequal.svg?style=flat)](https://www.npmjs.com/package/shallowequal)
 
 > `shallowequal` is like lodash's [`isEqual`](https://lodash.com/docs/3.10.1#isEqual) (v3.10.1) but for shallow (strict) equal.
 
@@ -20,17 +20,17 @@ The `customizer` is bound to `thisArg` and invoked with three arguments: `(value
 ## Install
 
 ```sh
-$ yarn add shallowequal
-# npm v5+
-$ npm install shallowequal
-# before npm v5
-$ npm install --save shallowequal
+pnpm add shallowequal
+# or
+npm install shallowequal
+# or
+yarn add shallowequal
 ```
 
 ## Usage
 
 ```js
-const shallowequal = require("shallowequal");
+import shallowequal from "shallowequal";
 
 const object = { user: "fred" };
 const other = { user: "fred" };
@@ -42,22 +42,63 @@ shallowequal(object, other);
 // → true
 ```
 
+### TypeScript
+
+This package includes TypeScript type definitions:
+
+```ts
+import shallowequal, { Comparator } from "shallowequal";
+
+const customCompare: Comparator = (a, b, key) => {
+  // Custom comparison logic
+  return undefined; // Fall back to default comparison
+};
+
+shallowequal({ a: 1 }, { a: 1 }, customCompare);
+// → true
+```
+
 ## Credit
 
 Code for `shallowEqual` originated from https://github.com/gaearon/react-pure-render/ and has since been refactored to have the exact same API as `lodash.isEqualWith` (as of `v4.17.4`).
 
 ## Development
 
-- `node.js` and `npm`. See: https://github.com/creationix/nvm#installation
-- `yarn`. See: https://yarnpkg.com/en/docs/install
-- `npm` dependencies. Run: `yarn install`
+Prerequisites:
+- [Node.js](https://nodejs.org/) (v18+)
+- [pnpm](https://pnpm.io/)
 
-### Chores
+### Setup
 
-- Lint: `yarn lint`
-- Test: `yarn test`
-- Pretty: `yarn pretty`
-- Prepare: `yarn prepare`
+```sh
+pnpm install
+```
+
+### Commands
+
+Using Make:
+
+```sh
+make install    # Install dependencies
+make build      # Build the project
+make test       # Run tests
+make test-watch # Run tests in watch mode
+make lint       # Run linter
+make typecheck  # Run type checking
+make clean      # Clean build artifacts
+make ci         # Run full CI pipeline
+```
+
+Or using pnpm directly:
+
+```sh
+pnpm install    # Install dependencies
+pnpm build      # Build the project
+pnpm test       # Run tests
+pnpm test:watch # Run tests in watch mode
+pnpm lint       # Run linter
+pnpm typecheck  # Run type checking
+```
 
 ## License
 

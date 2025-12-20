@@ -1,9 +1,0 @@
-sudo: false
-language: node_js
-node_js:
-  - 'node'
-  - 'lts/*'
-  - '10'
-  - '8'
-script: npm run travis
-install: yarn install

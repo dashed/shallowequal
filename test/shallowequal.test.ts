@@ -1,14 +1,9 @@
-describe("shallowequal", function() {
-  let shallowequal;
+import { describe, it, expect } from "vitest";
+import shallowequal from "../src/index";
 
+describe("shallowequal", () => {
   // eslint-disable-next-line no-sparse-arrays
   const falsey = [, "", 0, false, NaN, null, undefined];
-
-  beforeEach(() => {
-    // isolated instances of shallowequal for each test.
-    jest.resetModules();
-    shallowequal = jest.requireActual("../index.js");
-  });
 
   // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
   it("returns false if either argument is null", () => {
@@ -44,7 +39,7 @@ describe("shallowequal", function() {
   });
 
   it("returns true if values are not primitives but are ===", () => {
-    let obj = {};
+    const obj = {};
     expect(
       shallowequal({ a: 1, b: 2, c: obj }, { a: 1, b: 2, c: obj })
     ).toEqual(true);
@@ -58,10 +53,10 @@ describe("shallowequal", function() {
   });
 
   it("should provide the correct `customizer` arguments", () => {
-    let argsList = [];
+    const argsList: unknown[][] = [];
     const arry = [1, 2];
-    const object1 = { a: arry, b: null };
-    const object2 = { a: arry, b: null };
+    const object1: Record<string, unknown> = { a: arry, b: null };
+    const object2: Record<string, unknown> = { a: arry, b: null };
 
     object1.b = object2;
     object2.b = object1;
@@ -69,11 +64,12 @@ describe("shallowequal", function() {
     const expected = [
       [object1, object2],
       [object1.a, object2.a, "a"],
-      [object1.b, object2.b, "b"]
+      [object1.b, object2.b, "b"],
     ];
 
-    shallowequal(object1, object2, function(...args) {
+    shallowequal(object1, object2, (...args: unknown[]) => {
       argsList.push(args);
+      return undefined;
     });
 
     expect(argsList).toEqual(expected);
@@ -83,8 +79,8 @@ describe("shallowequal", function() {
     const actual = shallowequal(
       "a",
       "b",
-      function(a, b) {
-        return this[a] == this[b];
+      function (this: Record<string, number>, a: string, b: string) {
+        return this[a] === this[b];
       },
       { a: 1, b: 1 }
     );
@@ -93,7 +89,7 @@ describe("shallowequal", function() {
   });
 
   it("should handle comparisons if `customizer` returns `undefined`", () => {
-    const noop = () => void 0;
+    const noop = () => undefined;
 
     expect(shallowequal("a", "a", noop)).toEqual(true);
     expect(shallowequal(["a"], ["a"], noop)).toEqual(true);
@@ -101,7 +97,7 @@ describe("shallowequal", function() {
   });
 
   it("should not handle comparisons if `customizer` returns `true`", () => {
-    const customizer = function(value) {
+    const customizer = (value: unknown) => {
       return typeof value === "string" || undefined;
     };
 
@@ -111,7 +107,7 @@ describe("shallowequal", function() {
   });
 
   it("should not handle comparisons if `customizer` returns `false`", () => {
-    const customizer = function(value) {
+    const customizer = (value: unknown) => {
       return typeof value === "string" ? false : undefined;
     };
 
@@ -121,30 +117,30 @@ describe("shallowequal", function() {
   });
 
   it("should return a boolean value even if `customizer` does not", () => {
-    let actual = shallowequal("a", "b", () => "c");
+    let actual: boolean | boolean[] = shallowequal("a", "b", () => "c" as unknown as boolean);
     expect(actual).toEqual(true);
 
-    const values = falsey.filter(v => v !== undefined);
+    const values = falsey.filter((v) => v !== undefined);
     const expected = values.map(() => false);
 
     actual = [];
-    values.forEach(value => {
-      actual.push(shallowequal("a", "a", () => value));
+    values.forEach((value) => {
+      (actual as boolean[]).push(shallowequal("a", "a", () => value as unknown as boolean));
     });
 
     expect(actual).toEqual(expected);
   });
 
   it("should treat objects created by `Object.create(null)` like any other plain object", () => {
-    function Foo() {
+    function Foo(this: { a: number }) {
       this.a = 1;
     }
     Foo.prototype.constructor = null;
 
     const object2 = { a: 1 };
-    expect(shallowequal(new Foo(), object2)).toEqual(true);
+    expect(shallowequal(new (Foo as unknown as new () => { a: number })(), object2)).toEqual(true);
 
-    const object1 = Object.create(null);
+    const object1 = Object.create(null) as { a: number };
     object1.a = 1;
     expect(shallowequal(object1, object2)).toEqual(true);
   });
